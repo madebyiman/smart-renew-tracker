@@ -1,0 +1,71 @@
+/* ============================
+   Smart Renew Tracker – Admin Style
+   ============================ */
+
+/* Wrapper */
+.smartrt-wrap {
+    background: #fff;
+    padding: 20px 25px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    margin-top: 20px; /* Added for better spacing */
+}
+
+/* Headings */
+.smartrt-wrap h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #23282d;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Buttons - Scoped to our wrapper */
+.smartrt-wrap .button-primary {
+    background-color: #2271b1;
+    border-color: #1a5e98;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.smartrt-wrap .button-primary:hover {
+    background-color: #135e96;
+    border-color: #0f4e7d;
+}
+
+/* Form table styles */
+.smartrt-wrap table.form-table th {
+    width: 220px;
+    padding: 10px 0;
+}
+
+.smartrt-wrap table.form-table input[type="number"],
+.smartrt-wrap table.form-table input[type="text"],
+.smartrt-wrap table.form-table input[type="date"] {
+    width: 200px;
+    padding: 6px 8px;
+}
+
+/* Notice styles (If custom class used) */
+.notice-warning.smartrt-alert {
+    border-left-color: #dba617;
+}
+
+.notice-warning.smartrt-alert ul {
+    margin-left: 20px;
+    list-style: disc;
+}
+
+/* Table colors for expiration levels */
+.smartrt-status-green {
+    background-color: #dff0d8 !important;
+}
+
+.smartrt-status-yellow {
+    background-color: #fcf8e3 !important;
+}
+
+.smartrt-status-red {
+    background-color: #f2dede !important;
+}

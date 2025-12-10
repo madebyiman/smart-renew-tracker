@@ -1,0 +1,13 @@
+# IDE & OS Files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# WordPress specifics
+node_modules/
+vendor/
+
+# Archives
+*.zip
+*.tar.gz
