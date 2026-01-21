@@ -10,9 +10,7 @@ class Email_Notifications {
         add_action( 'wp_ajax_smartrt_send_test_email', [ $this, 'handle_test_email_ajax' ] );
     }
 
-    // متد جدید برای دکمه تست
     public function handle_test_email_ajax() {
-        // چک کردن امنیت
         if ( ! current_user_can( 'manage_options' ) || ! check_ajax_referer( 'smartrt_test_nonce', 'nonce', false ) ) {
             wp_send_json_error( __( 'Permission denied.', 'smart-renew-tracker' ) );
         }
@@ -56,6 +54,40 @@ class Email_Notifications {
     }
 
     public function process_notifications() {
-        // کدهای قبلی متد پروسس...
+        $alert_days   = get_option( 'smartrt_alert_days', 7 );
+        $target_email = get_option( 'smartrt_target_email', get_option( 'admin_email' ) );
+        $today        = current_time( 'timestamp' );
+
+        // ۲. کوئری برای پیدا کردن تمام موارد ثبت شده
+        $query = new \WP_Query( [
+                'post_type'      => 'smartrt_renewal',
+                'posts_per_page' => -1,
+                'post_status'    => 'publish',
+        ] );
+
+        $expiring_items = [];
+
+        foreach ( $query->posts as $renewal ) {
+            $renewal_date = get_post_meta( $renewal->ID, '_smartrt_renewal_date', true );
+            if ( ! $renewal_date ) continue;
+
+            $diff = ceil( ( strtotime( $renewal_date ) - $today ) / DAY_IN_SECONDS );
+
+            // اگر مورد در بازه هشدار (مثلاً ۷ روز مانده) باشد
+            if ( $diff <= $alert_days && $diff >= 0 ) {
+                $expiring_items[] = [
+                        'title' => get_the_title( $renewal->ID ),
+                        'days'  => $diff,
+                        'date'  => $renewal_date,
+                        'type'  => get_post_meta( $renewal->ID, '_smartrt_type', true )
+                ];
+            }
+        }
+
+        if ( ! empty( $expiring_items ) ) {
+            $this->send_html_email( $target_email, $expiring_items );
+        }
     }
 }
+
+new Email_Notifications();
