@@ -2,7 +2,7 @@
 /*
 Plugin Name: Smart Renew Tracker
 Description: Track and manage your domain and hosting renewals inside WordPress. Get renewal reminders and stay organized.
-Version: 1.0.1
+Version: 1.1.0
 Author: Iman Hossein Gholizadeh
 Author URI: https://www.linkedin.com/in/iman-hossein-gholizadeh/
 License: GPL v2 or later
@@ -22,6 +22,7 @@ define( 'SMARTRT_URL', plugin_dir_url( __FILE__ ) );
 // Includes - (We will fix these files next)
 require_once SMARTRT_PATH . 'includes/admin.php';
 require_once SMARTRT_PATH . 'includes/alerts.php';
+require_once SMARTRT_PATH . 'includes/email-notifications.php';
 
 class Plugin {
 
@@ -230,5 +231,16 @@ class Plugin {
         }
     }
 }
+
+register_activation_hook( __FILE__, function() {
+    if ( ! wp_next_scheduled( 'smartrt_daily_email_check' ) ) {
+        wp_schedule_event( time(), 'daily', 'smartrt_daily_email_check' );
+    }
+} );
+
+register_deactivation_hook( __FILE__, function() {
+    wp_clear_scheduled_hook( 'smartrt_daily_email_check' );
+} );
+
 
 new Plugin();

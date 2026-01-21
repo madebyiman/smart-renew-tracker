@@ -3,7 +3,7 @@ Contributors: madebyiman
 Tags: renewals, hosting, domain, reminder, alert, notification, expiry
 Requires at least: 5.8
 Tested up to: 6.9
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -53,6 +53,13 @@ Yes, under **Renew Tracker → Settings**, you can define the number of days in 
 No. All data stays inside your WordPress database.
 
 == Changelog ==
+
+= 1.1.0 =
+* New: Added an automated Email Notification system to alert users before renewals expire.
+* New: Added an AJAX-powered "Send Test Email" button in the settings for instant verification.
+* Improved: Completely refactored the admin logic into a clean, Object-Oriented (OOP) structure.
+* Improved: Updated Settings UI with dedicated fields for notification email and alert days.
+* Improved: Integrated WP-Cron for reliable, automated daily checks of expiring services.
 
 = 1.0.1 =
 * Security Fix: Improved sanitization and escaping for inputs and outputs.
