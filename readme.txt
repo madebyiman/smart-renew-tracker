@@ -3,7 +3,7 @@ Contributors: madebyiman
 Tags: renewals, hosting, domain, reminder, alert, notification, expiry
 Requires at least: 5.8
 Tested up to: 6.9
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -76,7 +76,7 @@ Yes, under **Renew Tracker → Settings**, you can define the number of days in 
 
 == Upgrade Notice ==
 
-= 1.1.2 =
+= 1.1.3 =
 Minor bug fixes and repository sync improvements. Recommended for all users.
 
 = 1.1.0 =
